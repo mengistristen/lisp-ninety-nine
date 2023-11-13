@@ -1,6 +1,12 @@
+;;; My implementation of "L-99: Ninety-Nine Lisp Problems"
 #lang racket
 
-; P01
+;; P01
+;; 
+;; Returns the last element of a list.
+;; Example:
+;; > (my-last '(1 2 3))
+;; 3
 (define (my-last input) 
   (if (null? input) 
     null
@@ -8,14 +14,24 @@
       (car input)
       (my-last (cdr input)))))
 
-; P02
+;; P02
+;;
+;; Returns the last two element of a list.
+;; Example:
+;; > (my-but-last '(1 2 3))
+;; '(2 3)
 (define (my-but-last input)
   (case (length input)
     [(0 1) null]
     [(2) input]
     [else (my-but-last (cdr input))]))
 
-; P03
+;; P03
+;;
+;; Returns the element at the k-th position in a list.
+;; Example:
+;; > (element-at '(1 2 3) 2)
+;; 2
 (define (element-at input k)
   (letrec ([at-inner 
              (lambda (input k accum) 
@@ -26,7 +42,12 @@
                      (at-inner (cdr input) k (+ accum 1)))))])
     (at-inner input k 1)))
 
-; P04
+;; P04
+;;
+;; Returns the number of elements in a list.
+;; Example:
+;; > (my-count '(1 2 3))
+;; 3
 (define (my-count input) 
   (letrec ([count-inner
           (lambda (input n)
