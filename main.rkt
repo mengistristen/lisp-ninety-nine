@@ -55,3 +55,17 @@
               n
               (count-inner (cdr input) (+ n 1))))])
     (count-inner input 0)))
+
+;; P05
+;;
+;; Reverses the input list.
+;; Example:
+;; > (rev '(1 2 3))
+;; '(3 2 1)
+(define (rev input) 
+  (letrec ([rev-inner
+          (lambda (input accum)
+            (if (null? input)
+               accum
+              (rev-inner (cdr input) (cons (car input) accum))))])
+    (rev-inner input null)))
