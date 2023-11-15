@@ -89,3 +89,16 @@
     [(list? (car input)) (append (my-flatten (car input)) (my-flatten (cdr input)))]
     [else (cons (car input) (my-flatten (cdr input)))]))
 
+;; P08
+;;
+;; Example:
+;; > (compress '(a a a b b c c c c))
+;; '(a b c)
+(define (compress input)
+  (letrec ([compress-inner (lambda (input prev accum)
+                             (cond 
+                               [(null? input) accum]
+                               [(equal? prev (car input)) (compress-inner (cdr input) prev accum)]
+                               [else (compress-inner (cdr input) (car input) (append accum (list (car input))))]))])
+    (compress-inner input null '())))
+
