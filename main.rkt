@@ -77,3 +77,15 @@
 ;; #t
 (define (palindrome input)
   (equal? input (rev input)))
+
+;; P07
+;;
+;; Example:
+;; > (my-flatten '((1 2) 3))
+;; '(1 2 3)
+(define (my-flatten input)
+  (cond 
+    [(null? input) '()]
+    [(list? (car input)) (append (my-flatten (car input)) (my-flatten (cdr input)))]
+    [else (cons (car input) (my-flatten (cdr input)))]))
+
