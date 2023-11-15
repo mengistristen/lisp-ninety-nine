@@ -35,11 +35,11 @@
 (define (element-at input k)
   (letrec ([at-inner 
              (lambda (input k accum) 
-                 (if (null? input)
-                   null
-                   (if (equal? k accum)
-                     (car input)
-                     (at-inner (cdr input) k (+ accum 1)))))])
+               (if (null? input)
+                 null
+                 (if (equal? k accum)
+                   (car input)
+                   (at-inner (cdr input) k (+ accum 1)))))])
     (at-inner input k 1)))
 
 ;; P04
@@ -50,10 +50,10 @@
 ;; 3
 (define (my-count input) 
   (letrec ([count-inner
-          (lambda (input n)
-            (if (null? input)
-              n
-              (count-inner (cdr input) (+ n 1))))])
+             (lambda (input n)
+               (if (null? input)
+                 n
+                 (count-inner (cdr input) (+ n 1))))])
     (count-inner input 0)))
 
 ;; P05
@@ -64,8 +64,16 @@
 ;; '(3 2 1)
 (define (rev input) 
   (letrec ([rev-inner
-          (lambda (input accum)
-            (if (null? input)
-               accum
-              (rev-inner (cdr input) (cons (car input) accum))))])
+             (lambda (input accum)
+               (if (null? input)
+                 accum
+                 (rev-inner (cdr input) (cons (car input) accum))))])
     (rev-inner input null)))
+
+;; P06
+;;
+;; Example:
+;; > (palindrome '(3 2 1 2 3))
+;; #t
+(define (palindrome input)
+  (equal? input (rev input)))
