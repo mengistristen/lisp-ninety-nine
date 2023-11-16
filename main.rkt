@@ -102,3 +102,17 @@
                                [else (compress-inner (cdr input) (car input) (append accum (list (car input))))]))])
     (compress-inner input null '())))
 
+;; P09
+;;
+;; Example:
+;; > (pack '(a a a b b c c c c))
+;; '((a a a) (b b) (c c c c))
+(define (pack input) 
+  (letrec ([pack-inner (lambda (input prev accum)
+                         (cond
+                           [(null? input) (if (and (null? accum) (null? prev)) null (append accum (list prev)))]
+                           [(null? prev) (pack-inner (cdr input) (list (car input)) accum)]
+                           [(equal? (car prev) (car input)) (pack-inner (cdr input) (append prev (list (car input))) accum)]
+                           [else (pack-inner (cdr input) (list (car input)) (append accum (list prev)))]))])
+    (pack-inner input '() '())))
+
